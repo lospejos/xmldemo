@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+    <n1 id="n1-0">N1-0
+        <n2 id="n2-0-0">Node 0-0</n2>
+        <n2 id="n2-0-1">Node 0-1</n2>
+    </n1>
+    <n1 id="n1-1">N1-1
+        <n2 id="n2-1-0">Node 1-0</n2>
+        <n2 id="n2-1-1">Node 1-1</n2>
+    </n1>
+</root>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+
+    <!-- refer to http://logback.qos.ch/manual/appenders.html -->
+    <!--config.logger.fileappender.filepath>.</config.logger.fileappender.filepath>
+    <config.logger.level>DEBUG</config.logger.level>
+    <property name="logFile"
+              value="${config.logger.fileappender.filepath}/${pom.artifactId}-${project.version}" /-->
+    <!--include resource="org/springframework/boot/logging/logback/base.xml"/-->
+    <logger name="org.springframework" level="WARN"/>
+
+    <property name="logDir" value="log" />
+    <property name="logFile" value="liqpay-server" />
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logDir}/${logFile}.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logDir}/${logFile}_%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSSZ} %-5level [%thread] %class{36}.%M:%L %mdc - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSSZ} %-5level [%thread] %class{36}.%M:%L %mdc - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--logger name="org.n52" level="${config.logger.level}" /-->
+
+    <!-- This prevents "Scavenging session" log garbage -->
+    <logger name="org.eclipse.jetty.server.session.HashSessionManager" additivity="false" level="WARN" />
+    <logger name="com.zaxxer.hikari.pool.HikariPool" additivity="false" level="WARN" />
+    <logger name="com.zaxxer.hikari.pool.PoolBase" additivity="false" level="WARN" />
+
+    <root level="DEBUG">
+        <!--appender-ref ref="FILE" /-->
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
